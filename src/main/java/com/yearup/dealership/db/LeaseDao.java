@@ -18,7 +18,7 @@ public class LeaseDao {
     public void addLeaseContract(LeaseContract leaseContract) {
         try (Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO lease_contracts (vin, lease_start, lease_end, monthly_payment) " +
+                    "INSERT INTO lease_contracts (VIN, lease_start, lease_end, monthly_payment) " +
                             "VALUES(?,?,?,?) "
             )) {
             preparedStatement.setString(1, leaseContract.getVin());

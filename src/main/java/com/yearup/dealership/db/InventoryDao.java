@@ -13,10 +13,30 @@ public class InventoryDao {
     }
 
     public void addVehicleToInventory(String vin, int dealershipId) {
-        // TODO: Implement the logic to add a vehicle to the inventory
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO inventory (VIN, dealership_id) " + "VALUES(?,?) "
+            )) {
+            preparedStatement.setString(1, vin);
+            preparedStatement.setInt(2, dealershipId);
+
+            int rows = preparedStatement.executeUpdate();
+            System.out.println(rows + " rows were affected.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void removeVehicleFromInventory(String vin) {
-        // TODO: Implement the logic to remove a vehicle from the inventory
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM inventory WHERE VIN = ?"
+            )) {
+            preparedStatement.setString(1, vin);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
