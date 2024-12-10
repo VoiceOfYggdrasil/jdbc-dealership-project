@@ -15,7 +15,7 @@ public class InventoryDao {
     public void addVehicleToInventory(String vin, int dealershipId) {
         try (Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO inventory (VIN, dealership_id) " + "VALUES(?,?) "
+                    "INSERT INTO inventory (VIN, dealership_id) " + "VALUES(?,?)"
             )) {
             preparedStatement.setString(1, vin);
             preparedStatement.setInt(2, dealershipId);
